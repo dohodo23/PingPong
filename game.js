@@ -34,7 +34,10 @@ var paddleComputer = {
 	positionY: 300,
 	color:'white',
 	score:0,
-	paddleCenter: function(){return this.height/2;}
+	paddleCenter: function(){return this.height/2;},
+	speed:7,
+	whenToMove:35
+
 };
 
 var powerUp = {
@@ -79,8 +82,6 @@ function moveEverything(){
 	computerMovement();
 	canvasCollision();
 	paddleCollision();
-
-	
 	
 }
 
@@ -138,11 +139,11 @@ function computerMovement(){
 		// This funtion let the computer move and looks what the ball position is.
 
 		// checks the ball position and start to move when the ball is out of range from the paddle
-		if(paddleComputer.positionY + paddleComputer.paddleCenter() < ball.positionY-35){
-			paddleComputer.positionY+= 7;
+		if(paddleComputer.positionY + paddleComputer.paddleCenter() < ball.positionY-paddleComputer.whenToMove){
+			paddleComputer.positionY+= paddleComputer.speed;
 		}
-		else if(paddleComputer.positionY + paddleComputer.paddleCenter() > ball.positionY+35){
-			paddleComputer.positionY -= 7;
+		else if(paddleComputer.positionY + paddleComputer.paddleCenter() > ball.positionY+paddleComputer.whenToMove){
+			paddleComputer.positionY -= paddleComputer.speed;
 		}		
 }
 
